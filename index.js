@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
@@ -81,7 +82,7 @@ function addEngineer() {
     ]).then((response) => {
         const newEngineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGitHub)
         teamArray.push(newEngineer);
-        mainMenu()
+        mainMenu();
     })
 }
 
@@ -110,8 +111,68 @@ function addIntern() {
     ]).then((response) => {
         const newIntern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool)
         teamArray.push(newIntern);
-        mainMenu()
+        mainMenu();
     })
+}
+
+function checkMembers() {
+    for (let i = 0; i < teamArray.length; i++) {
+        const element = teamArray[i];
+        if (element.getRole() === "Engineer") {
+        return `<div class="card m-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">${element.name} ${element.role}</h5>
+          <p class="card-text border">ID: ${element.id}</p>
+          <p class="card-text border">Email: ${element.email}</p>
+          <a href="https://github.com/${element.github}" target="_blank" class="btn btn-primary">${element.name}'s GitHub Page</a>
+        </div>
+        </div>`
+        }   else if (element.getRole() === "Intern") {
+            return `<div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${element.name} ${element.role}</h5>
+              <p class="card-text border">ID: ${element.id}</p>
+              <p class="card-text border">Email: ${element.email}</p>
+              <p class="card-text border">School: ${element.school}</p>
+            </div>
+            </div>`
+        }   else if (element.getRole() === "Manager") {
+            return `<div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${element.name} ${element.role}</h5>
+              <p class="card-text border">ID: ${element.id}</p>
+              <p class="card-text border">Email: ${element.email}</p>
+              <p class="card-text border">Office Number: ${element.officeNumber}</p>
+            </div>
+            </div>`
+        }         
+    }
+}
+
+function submitHTML() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'Are you sure you are ready to submit your team?',
+            name: 'finalCheck',
+        },
+    ]).then((response) => {
+        fs.writeFile('.index.html', `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+            <title>Team Profile Generator</title>
+        </head>
+        <body>
+        ${checkMembers()}
+            
+        </body>
+        </html>`)
+    })
+
 }
 
 start();
