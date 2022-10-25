@@ -126,8 +126,8 @@ function checkMembers() {
 
 function checkMembersRole(member) {
         if (member.getRole() === "Engineer") {
-        return `<div class="card m-3 border-dark" style="width: 18rem;">
-        <div class="card-body">
+        return `<div class="card m-3 d-flex flex-column border-dark" style="width: 18rem;">
+        <div class="card-body border-dark">
           <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
           <h3 class="bg-info text-white p-3 m-0">Engineer</h3>
           <p class="card-text border-dark m-1">ID: ${member.id}</p>
@@ -136,7 +136,7 @@ function checkMembersRole(member) {
         </div>
         </div>`
         }   else if (member.getRole() === "Intern") {
-            return `<div class="card m-3" style="width: 18rem;">
+            return `<div class="card m-3 d-flex flex-column border-dark" style="width: 18rem;">
             <div class="card-body">
               <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
               <h3 class="bg-info text-white p-3 m-0">Intern</h3>
@@ -146,7 +146,7 @@ function checkMembersRole(member) {
             </div>
             </div>`
         }   else if (member.getRole() === "Manager") {
-            return `<div class="card m-3" style="width: 18rem;">
+            return `<div class="card m-3 d-flex flex-column border-dark" style="width: 18rem;">
             <div class="card-body">
               <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
               <h3 class="bg-info text-white p-3 m-0">Manager</h3>
