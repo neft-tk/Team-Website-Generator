@@ -117,10 +117,11 @@ function addIntern() {
 }
 
 function checkMembers() {
-    let completeTeam = [];
+    let completeTeam = ``;
     for (let i = 0; i < teamArray.length; i++) {
         const element = teamArray[i];
-        completeTeam.push(checkMembersRole(element));
+        completeTeam += (checkMembersRole(element))
+        completeTeam += `\n`;
     } return completeTeam;
 }
 
