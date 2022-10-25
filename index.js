@@ -131,8 +131,8 @@ function checkMembersRole(member) {
           <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
           <h3 class="bg-info text-white p-3 m-0">Engineer</h3>
           <p class="card-text border-dark m-1">ID: ${member.id}</p>
-          <a href="mailto:${member.email}" class="card-text border-dark m-1">Email: ${member.email}</a>
-          <a href="https://github.com/${member.github}" target="_blank" class="btn btn-primary">${member.name}'s GitHub Page</a>
+          <p class="card-text border-dark m-1">Email: <a href="mailto:${member.email}" class="card-text border-dark m-1">${member.email}</a>
+          <p class="card-text border-dark m-1">GitHub: <a href="https://github.com/${member.github}" target="_blank">${member.github}</a>
         </div>
         </div>`
         }   else if (member.getRole() === "Intern") {
@@ -141,7 +141,7 @@ function checkMembersRole(member) {
               <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
               <h3 class="bg-info text-white p-3 m-0">Intern</h3>
               <p class="card-text border-dark m-1">ID: ${member.id}</p>
-              <a href="mailto:${member.email}" class="card-text border-dark m-1">Email: ${member.email}</a>
+              <p class="card-text border-dark m-1">Email: <a href="mailto:${member.email}" class="card-text border-dark m-1">${member.email}</a>
               <p class="card-text border-dark m-1">School: ${member.school}</p>
             </div>
             </div>`
@@ -151,7 +151,7 @@ function checkMembersRole(member) {
               <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
               <h3 class="bg-info text-white p-3 m-0">Manager</h3>
               <p class="card-text border-dark m-1">ID: ${member.id}</p>
-              <a href="mailto:${member.email}" class="card-text border-dark m-1">Email: ${member.email}</a>
+              <p class="card-text border-dark m-1">Email: <a href="mailto:${member.email}" class="card-text border-dark m-1">${member.email}</a>
               <p class="card-text border-dark m-1">Office Number: ${member.officeNumber}</p>
             </div>
             </div>`
