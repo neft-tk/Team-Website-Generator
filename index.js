@@ -37,6 +37,7 @@ function start() {
 }
 
 function mainMenu() {
+    console.log(teamArray);    
     inquirer.prompt([
         {
             type: 'list',
@@ -116,48 +117,57 @@ function addIntern() {
 }
 
 function checkMembers() {
+    let completeTeam = [];
     for (let i = 0; i < teamArray.length; i++) {
         const element = teamArray[i];
-        if (element.getRole() === "Engineer") {
+        completeTeam.push(checkMembersRole(element));
+    } return completeTeam;
+}
+
+function checkMembersRole(member) {
+        if (member.getRole() === "Engineer") {
         return `<div class="card m-3" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">${element.name} ${element.role}</h5>
-          <p class="card-text border">ID: ${element.id}</p>
-          <p class="card-text border">Email: ${element.email}</p>
-          <a href="https://github.com/${element.github}" target="_blank" class="btn btn-primary">${element.name}'s GitHub Page</a>
+          <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
+          <h3 class="bg-info text-white p-3 m-0">Engineer</h3>
+          <p class="card-text border">ID: ${member.id}</p>
+          <a href="mailto:${member.email}" class="card-text border">Email: ${member.email}</a>
+          <a href="https://github.com/${member.github}" target="_blank" class="btn btn-primary">${member.name}'s GitHub Page</a>
         </div>
         </div>`
-        }   else if (element.getRole() === "Intern") {
+        }   else if (member.getRole() === "Intern") {
             return `<div class="card m-3" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">${element.name} ${element.role}</h5>
-              <p class="card-text border">ID: ${element.id}</p>
-              <p class="card-text border">Email: ${element.email}</p>
-              <p class="card-text border">School: ${element.school}</p>
+              <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
+              <h3 class="bg-info text-white p-3 m-0">Intern</h3>
+              <p class="card-text border">ID: ${member.id}</p>
+              <a href="mailto:${member.email}" class="card-text border">Email: ${member.email}</a>
+              <p class="card-text border">School: ${member.school}</p>
             </div>
             </div>`
-        }   else if (element.getRole() === "Manager") {
+        }   else if (member.getRole() === "Manager") {
             return `<div class="card m-3" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">${element.name} ${element.role}</h5>
-              <p class="card-text border">ID: ${element.id}</p>
-              <p class="card-text border">Email: ${element.email}</p>
-              <p class="card-text border">Office Number: ${element.officeNumber}</p>
+              <h2 class="card-title bg-info text-white p-3 m-0">${member.name}</h2>
+              <h3 class="bg-info text-white p-3 m-0">Manager</h3>
+              <p class="card-text border">ID: ${member.id}</p>
+              <a href="mailto:${member.email}" class="card-text border">Email: ${member.email}</a>
+              <p class="card-text border">Office Number: ${member.officeNumber}</p>
             </div>
             </div>`
         }         
-    }
 }
+
 
 function submitHTML() {
     inquirer.prompt([
         {
-            type: 'input',
+            type: 'confirm',
             message: 'Are you sure you are ready to submit your team?',
             name: 'finalCheck',
         },
-    ]).then((response) => {
-        fs.writeFile('.index.html', `<!DOCTYPE html>
+    ]).then((response) => 
+        fs.writeFileSync('./output/index.html', `<!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -167,12 +177,15 @@ function submitHTML() {
             <title>Team Profile Generator</title>
         </head>
         <body>
+        <div>
+            <h1 class="jumbotron text-center bg-info text-white">My Team</h1>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
         ${checkMembers()}
-            
+        </div>    
         </body>
-        </html>`)
-    })
-
-}
+        </html>`), (err) => 
+        err ? console.error(err) : console.log('Generating HTML...')
+        )}
 
 start();
