@@ -7,6 +7,7 @@ const Intern = require('./lib/Intern');
 
 const teamArray = [];
 
+// Prompt given to user on start up, adds the response as a new Manager to the teamArray
 function start() {
     inquirer.prompt([
         {
@@ -36,6 +37,7 @@ function start() {
     })
 }
 
+// Mainmenu function which will give the user a couple different options after creating their manager for their team
 function mainMenu() {
     console.log(teamArray);    
     inquirer.prompt([
@@ -58,6 +60,7 @@ function mainMenu() {
     })
 }
 
+// Creates a new engineer and returns to the main menu
 function addEngineer() {
     inquirer.prompt([
         {
@@ -87,6 +90,7 @@ function addEngineer() {
     })
 }
 
+// Creates a new intern and returns to the main menu
 function addIntern() {
     inquirer.prompt([
         {
@@ -116,6 +120,7 @@ function addIntern() {
     })
 }
 
+// Goes over the teamArray, creates a new string called completeTeam which is a combination of strings based on the users inside of teamArray
 function checkMembers() {
     let completeTeam = ``;
     for (let i = 0; i < teamArray.length; i++) {
@@ -125,6 +130,7 @@ function checkMembers() {
     } return completeTeam;
 }
 
+// Checks a member's role and then returns html based on the role, the html will then have specific areas filled in based on the information in that member object
 function checkMembersRole(member) {
         if (member.getRole() === "Engineer") {
         return `<div class="card m-3 d-flex flex-column border-dark" style="width: 18rem;">
@@ -159,7 +165,7 @@ function checkMembersRole(member) {
         }         
 }
 
-
+// Has a final check that then generates the starter code for the html page, and has a function inside that generates more html based on the members in teamArray
 function submitHTML() {
     inquirer.prompt([
         {
@@ -188,5 +194,6 @@ function submitHTML() {
         </html>`), (err) => 
         err ? console.error(err) : console.log('Generating HTML...')
         )}
+
 
 start();

@@ -34,3 +34,5 @@ My GitHub username is neft-tk, and you can see more of my work at https://github
 You can also reach me at ebussman@gmail.com
 
 ![screenshot1](./assets/images/screenshot1.png)
+
+![video](./assets/vid/ErikBussTeamWebsiteGenerator.webm)
